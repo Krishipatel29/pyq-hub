@@ -1,5 +1,5 @@
 # PYQ Hub
-
+**Live demo:** https://pyq-hub.vercel.app
 Previous year question papers, organised by subject, with a list of the questions that keep repeating across years.
 
 Before exams, students hunt for old papers in WhatsApp groups and blurry photos, and nobody really knows which questions come every year. PYQ Hub keeps all papers of a subject in one place, compares their questions year by year, and shows the repeated ones first.
@@ -138,7 +138,6 @@ Vite forwards `/api` calls to the backend, so no extra config is needed locally.
 
 | Role | Email | Password |
 | --- | --- | --- |
-| Admin | admin@pyqhub.com | Admin@123 |
 | Student | student@pyqhub.com | Student@123 |
 
 ## Deploy
