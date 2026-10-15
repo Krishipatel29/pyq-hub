@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Atkinson Hyperlegible", system-ui, sans-serif;
+  --font-display: "Familjen Grotesk", "Atkinson Hyperlegible", sans-serif;
+
+  --color-sheet: #f5f7fa;      /* page background, like answer sheet paper */
+  --color-paper: #ffffff;      /* surfaces */
+  --color-rule: #dfe5ee;       /* ruled lines / borders */
+  --color-ink: #1b2130;        /* main text */
+  --color-pencil: #5d6678;     /* secondary text */
+  --color-ballpoint: #2547a8;  /* primary - blue pen */
+  --color-ballpoint-dark: #1a3480;
+  --color-ballpoint-soft: #e8edfa;
+  --color-highlight: #ffe45c;  /* highlighter - repeated questions */
+  --color-highlight-soft: #fff6c2;
+  --color-redpen: #c93a3a;     /* errors, rejected */
+  --color-redpen-soft: #fbeaea;
+  --color-tick: #1e8e5a;       /* approved */
+  --color-tick-soft: #e4f4ec;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-sheet text-ink font-sans antialiased;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display text-ink;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+  :focus-visible {
+    outline: 2.5px solid var(--color-ballpoint);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  ::selection {
+    background: var(--color-highlight);
+  }
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 font-display font-semibold
+    transition-colors disabled:cursor-not-allowed disabled:opacity-60;
+}
+@utility btn-primary {
+  @apply btn bg-ballpoint text-white hover:bg-ballpoint-dark;
+}
+@utility btn-ghost {
+  @apply btn border border-rule bg-paper text-ink hover:border-pencil/50;
+}
+@utility btn-danger {
+  @apply btn border border-redpen/30 bg-paper text-redpen hover:bg-redpen-soft;
+}
+@utility input {
+  @apply w-full rounded-lg border border-rule bg-paper px-3.5 py-2.5 text-ink placeholder:text-pencil/70
+    outline-none transition-colors focus:border-ballpoint focus:ring-3 focus:ring-ballpoint/15;
+}
+@utility label {
+  @apply mb-1.5 block text-sm font-bold text-ink;
+}
+@utility panel {
+  @apply rounded-xl border border-rule bg-paper;
+}
+
+/* the highlighter stroke - the main visual idea of the app */
+.marker {
+  background-image: linear-gradient(
+    100deg,
+    transparent 0.4em,
+    var(--color-highlight) 0.4em,
+    var(--color-highlight) calc(100% - 0.3em),
+    transparent calc(100% - 0.3em)
+  );
+  background-size: 100% 0.62em;
+  background-position: 0 88%;
+  background-repeat: no-repeat;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding: 0 0.15em;
+}
+
+.marker-animate {
+  animation: swipe 0.9s cubic-bezier(0.65, 0, 0.35, 1) 0.35s both;
+}
+
+@keyframes swipe {
+  from { background-size: 0% 0.62em; }
+  to { background-size: 100% 0.62em; }
+}
+
+/* faint ruled lines behind the hero, like a notebook page */
+.ruled {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 35px,
+    var(--color-rule) 35px,
+    var(--color-rule) 36px
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marker-animate { animation: none; }
+  * { transition: none !important; }
+}
