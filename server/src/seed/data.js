@@ -4,7 +4,7 @@ const U = "VNSGU";
 const MCA = "MCA";
 
 const users = {
-  admin: { name: "Admin", email: "admin@pyqhub.com", password: "Admin@123", role: "admin", college: U },
+admin: { name: "Admin", email: "admin@pyqhub.com", password: process.env.ADMIN_PASSWORD || "Admin@123", role: "admin", college: U },
   student: { name: "Demo Student", email: "student@pyqhub.com", password: "Student@123", college: U },
 };
 
